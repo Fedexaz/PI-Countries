@@ -40,10 +40,9 @@ const loadDB = async () => {
     }
 }
 
+loadDB()
 
 route.get('/', async (req, res) => {
-    await loadDB();
-
     const { name } = req.query;  
 
     if(name){
@@ -65,7 +64,7 @@ route.get('/', async (req, res) => {
     }
     else{
         const resultado = await Country.findAll()
-        res.json(resultado)
+        res.send(resultado)
     }
 
 })
