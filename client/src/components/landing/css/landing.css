@@ -1,0 +1,34 @@
+body{
+    background-image: url("./back.jpg");
+    background-size: 100%;
+}
+
+.container{
+    height: 100%;
+    background: rgba(159, 191, 202, 0.5);
+    padding: 40px;
+    border-radius: 10px;
+    margin: 30px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.title{
+    display: flex;
+    justify-content: center;
+    color: black;
+    opacity: 1;
+    font-size: 50px;
+}
+
+.boton{
+    background-color: aliceblue;
+    transition: 0.5;
+}
+
+.boton:hover{
+    background-color: black;
+}
+
+.boton:active{
+    transform: scale(.8);
+}
