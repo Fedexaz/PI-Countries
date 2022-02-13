@@ -16,7 +16,7 @@ const loadDB = async () => {
                 let cap = "None";
 
                 if(Array.isArray(e.capital)){
-                    let cap = e.capital.pop();
+                    cap = e.capital.pop();
                 }
 
                 await Country.create({
