@@ -44,19 +44,29 @@ export default function reducer(state = initialState, action){
         case "ORDEN_ALFABETICO_ASC":{
             return {
                 ...state,
+                countries: state.countries.sort((a, b) => a.name - b.name)
             }
         }
         
         case "ORDEN_ALFABETICO_DESC":{
-
+            return {
+                ...state,
+                countries: state.countries.sort((a, b) => a.name > b.name)
+            }
         }
         
         case "ORDEN_POBLACION_ASC":{
-
+            return {
+                ...state,
+                countries: state.countries.sort((a, b) => a.poblacion - b.poblacion)
+            }
         }
         
         case "ORDEN_POBLACION_DESC":{
-
+            return {
+                ...state,
+                countries: state.countries.sort((a, b) => a.poblacion > b.poblacion)
+            }
         }
         
         default:{
