@@ -1,10 +1,30 @@
 import axios from 'axios';
 
-export function addActividad(payload){
-    return {
-        type: "AGREGAR_ACTIVIDAD",
-        payload
-    }
+export function addActividad(name, dificultad, duracion, temporada, idPais){
+    return function (dispatch){
+        return axios.post('http://localhost:3001/activity/', {
+            name,
+            dificultad,
+            duracion,
+            temporada,
+            idPais
+        })
+        .then(resp => {
+            return {
+                type: "AGREGAR_ACTIVIDAD",
+                payload: {
+                    name,
+                    dificultad,
+                    duracion,
+                    temporada,
+                    idPais
+                }
+            }
+        })
+        .catch(e => {
+            console.log(e)
+        })  
+    }          
 }
 
 export function loadCountries(){
@@ -26,7 +46,7 @@ export function searchCountry(country){
     return axios.get(`http://localhost:3001/countries/?name=${country}`)
             .then(datos => {
                 return {
-                    type: "LOAD_COUNTRIES",
+                    type: "SEARCH_COUNTRY",
                     payload: datos.data
                 }
             })
@@ -37,25 +57,27 @@ export function searchCountry(country){
 
 export function filtrarPorContinente(continente){
     return {
-        type: "FILTRAR_CONTINENTE"
+        type: "FILTRAR_CONTINENTE",
+        payload: continente
     }
 }
 
-export function filtrarPorActividad(temporada){
+export function filtrarPorActividad(actividad){
     return {
-        type: "FILTRAR_ACTIVIDAD"
+        type: "FILTRAR_ACTIVIDAD",
+        payload: actividad
     }
 }
 
-export function filtrarPorOrdenAlfabetico(tipo){
+export function ordenAlfabetico(tipo){
     return {
-        type: tipo === "asc" ? "FILTRAR_ALFABETICO_ASC" : "FILTRAR_ALFABETICO_DESC"
+        type: tipo === "asc" ? "ORDEN_ALFABETICO_ASC" : "ORDEN_ALFABETICO_DESC"
     }
 }
 
-export function filtrarPorCantidadPoblacion(tipo){
+export function ordenCantidadPoblacion(tipo){
     return {
-        type: tipo === "asc" ? "FILTRAR_POBLACION_ASC" : "FILTRAR_POBLACION_DESC"
+        type: tipo === "asc" ? "ORDEN_POBLACION_ASC" : "ORDEN_POBLACION_DESC"
     }
 }
 

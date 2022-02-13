@@ -51,7 +51,8 @@ route.get('/', async (req, res) => {
                 name:{
                     [Op.iLike]: `%${name}%`
                 }
-            }
+            },
+            include: Activity
         })
 
         if(resultado.length === 0){
@@ -63,7 +64,7 @@ route.get('/', async (req, res) => {
         res.json(resultado)
     }
     else{
-        const resultado = await Country.findAll()
+        const resultado = await Country.findAll({include: Activity})
         res.send(resultado)
     }
 
