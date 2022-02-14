@@ -1,6 +1,7 @@
 const initialState = {
     countries: [],
-    activities: []
+    activities: [],
+    countryDetail: {}
 }
 
 export default function reducer(state = initialState, action){
@@ -66,6 +67,13 @@ export default function reducer(state = initialState, action){
             return {
                 ...state,
                 countries: state.countries.sort((a, b) => a.poblacion > b.poblacion)
+            }
+        }
+
+        case "COUNTRY_DETAIL":{
+            return {
+                ...state,
+                countryDetail: action.payload
             }
         }
         

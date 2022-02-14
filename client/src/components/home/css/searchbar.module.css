@@ -1,0 +1,24 @@
+.formulario{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.formulario > input{
+    border: 1px solid blueviolet;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 15px;
+    transition: .3s;
+}
+
+.formulario > input:focus{
+    outline: none !important;
+    border: 1px solid blueviolet;
+    box-shadow: 0 0 5px blueviolet;
+}
+
+.formulario > button{
+    padding: 11px;
+    margin-left: 5px;
+    margin-right: 10px;
+}

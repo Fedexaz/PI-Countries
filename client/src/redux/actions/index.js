@@ -10,7 +10,7 @@ export function addActividad(name, dificultad, duracion, temporada, idPais){
             idPais
         })
         .then(resp => {
-            return {
+            return dispatch({
                 type: "AGREGAR_ACTIVIDAD",
                 payload: {
                     name,
@@ -19,7 +19,7 @@ export function addActividad(name, dificultad, duracion, temporada, idPais){
                     temporada,
                     idPais
                 }
-            }
+            })
         })
         .catch(e => {
             console.log(e)
@@ -29,12 +29,12 @@ export function addActividad(name, dificultad, duracion, temporada, idPais){
 
 export function loadCountries(){
     return function (dispatch){
-        return axios.get('http://localhost:3001/countries')
+        return axios.get('http://localhost:3001/countries/')
             .then(datos => {
-                return {
+                return dispatch({
                     type: "LOAD_COUNTRIES",
                     payload: datos.data
-                }
+                })
             })
             .catch(e => {
                 console.log(e)
@@ -43,16 +43,18 @@ export function loadCountries(){
 }
 
 export function searchCountry(country){
-    return axios.get(`http://localhost:3001/countries/?name=${country}`)
+    return function (dispatch){
+        axios.get(`http://localhost:3001/countries/?name=${country}`)
             .then(datos => {
-                return {
+                return dispatch({
                     type: "SEARCH_COUNTRY",
                     payload: datos.data
-                }
+                })
             })
             .catch(e => {
                 console.log(e)
             })  
+    }
 }
 
 export function filtrarPorContinente(continente){
@@ -81,4 +83,9 @@ export function ordenCantidadPoblacion(tipo){
     }
 }
 
-
+export function countryDetail(payload){
+    return{
+        type: "COUNTRY_DETAIL",
+        payload
+    }    
+}
