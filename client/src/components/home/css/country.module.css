@@ -3,4 +3,18 @@
     background-color: aqua;
     border: 1px solid black;
     border-radius: 10px;
+    margin: 10px;
+    transition: 0.3s;
+}
+
+.card:hover{
+    transform: scale(1.03);
+}
+
+.card:active{
+    transform: translateY(-10px);
+}
+
+.card > h4,h3{
+    text-align: center;
 }

@@ -83,6 +83,9 @@ route.get('/:idPais', async (req, res) => {
     if(existe){
         res.json(existe)
     }
+    else return res.status(404).json({
+        msg: "País no encontrado"
+    })
 })
 
 module.exports = route;
