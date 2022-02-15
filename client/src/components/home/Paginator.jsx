@@ -7,6 +7,7 @@ import style from './css/paginator.module.css'
 
 export default function Paginator() {
   const paises = useSelector(state => state.countries)
+  const page = useSelector(state => state.page)
   const dispatch = useDispatch()
 
   const DEMAS_PAGINAS = 10;
@@ -14,7 +15,7 @@ export default function Paginator() {
   let paginatorTotal;
   let paginasConData;
 
-  let resto = paises.slice(10) //El total de paises despues de los primeros 10 de la primera pagina
+  let resto = paises //El total de paises despues de los primeros 10 de la primera pagina
   let paginator = Math.ceil(resto.length / 10)//Obtenemos la cantidad de paginas del paginador
   paginasConData = armarPaginas(resto, paginator) //Almacenamos las paginas con su data
   paginatorTotal = showPaginators(paginator)//cargamos en un array la cantidad de paginas
@@ -31,7 +32,6 @@ export default function Paginator() {
     return arr
   }
 
-
   function showPaginators(pages){
     let arr = []
     for(let i = 0; i < pages; i++){
@@ -45,10 +45,9 @@ export default function Paginator() {
   }
 
   useEffect(() => {
-    dispatch(changePage(paginasConData[0]))
-  }, [])
+    window.scrollTo({ behavior: 'smooth', top: '0px' });
+  }, [page])
   
-
   return (
     <div className={style.paginatorcontainer}>
       {

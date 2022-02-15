@@ -3,9 +3,9 @@
 body{
     font-family: 'Roboto Mono', monospace;
     background-image: url("https://www.wendyperrin.com/wp-content/uploads/2020/06/World-globe-shutterstock_1384546052.jpg");
-    background-size: cover;
+    background-size: 100%;
     background-repeat: no-repeat;
-    background-attachment: scroll;
+    background-attachment:fixed;
     
 }
 

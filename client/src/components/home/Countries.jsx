@@ -9,20 +9,22 @@ import { Link } from 'react-router-dom'
 
 import style from './css/countries.module.css'
 
-import { countryDetail, loadCountries } from '../../redux/actions'
+import { changePage, countryDetail, loadCountries } from '../../redux/actions'
 
 export default function Countries() {
-    
     const page = useSelector(state => state.page)
+    const paises = useSelector(state => state.countries);
     const dispatch = useDispatch()
 
     useEffect(() => {
         dispatch(loadCountries())
-    }, [])
+        if(!page.length){
+            dispatch(changePage(paises.slice(0, 9)))
+        }
+    }, [page])
 
     return (
         <>
-            <Paginator />
             <div className={style.cardcontainer}>
                 {page ? page.map(c => {
                     return(<Link key={c.ID} to={`/country/${c.ID}`} onClick={() => dispatch(countryDetail({
