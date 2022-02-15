@@ -1,0 +1,13 @@
+.paginatorcontainer{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.paginatorcontainer > p{
+    background-color: blue;
+    padding: 10px;
+    color: white;
+    cursor: pointer;
+}

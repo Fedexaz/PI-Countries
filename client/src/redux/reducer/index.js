@@ -1,5 +1,6 @@
 const initialState = {
     countries: [],
+    page: [],
     activities: [],
     countryDetail: {}
 }
@@ -7,6 +8,13 @@ const initialState = {
 export default function reducer(state = initialState, action){
     switch(action.type){
         
+        case "CHANGE_PAGE":{
+            return {
+                ...state,
+                page: action.payload
+            }
+        }
+
         case "AGREGAR_ACTIVIDAD":{
             return {
                 ...state,

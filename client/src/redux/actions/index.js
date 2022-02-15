@@ -27,6 +27,13 @@ export function addActividad(name, dificultad, duracion, temporada, idPais){
     }          
 }
 
+export function changePage(payload){
+    return {
+        type: "CHANGE_PAGE",
+        payload
+    }
+}
+
 export function loadCountries(){
     return function (dispatch){
         return axios.get('http://localhost:3001/countries/')
@@ -39,7 +46,7 @@ export function loadCountries(){
             .catch(e => {
                 console.log(e)
             })  
-    }          
+    }
 }
 
 export function searchCountry(country){

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 
 import Country from './Country'
+import Paginator from './Paginator'
 
 import { useSelector, useDispatch } from 'react-redux'
 
@@ -12,32 +13,33 @@ import { countryDetail, loadCountries } from '../../redux/actions'
 
 export default function Countries() {
     
-    const countries = useSelector(state => state.countries)
+    const page = useSelector(state => state.page)
     const dispatch = useDispatch()
 
     useEffect(() => {
-        if(countries.length === 0){
-            dispatch(loadCountries())
-        }
-    }, [dispatch, countries.length])
-    
+        dispatch(loadCountries())
+    }, [])
 
     return (
-        <div className={style.cardcontainer}>
-            {countries ? countries.map(c => {
-                return(<Link key={c.ID} to={`/country/${c.ID}`} onClick={() => dispatch(countryDetail({
-                    ID: c.ID, 
-                    name: c.name, 
-                    urlImg: c.urlImg, 
-                    continent: c.continent, 
-                    capital: c.capital,
-                    area: c.area,
-                    poblacion: c.poblacion,
-                    activities: c.activities
+        <>
+            <Paginator />
+            <div className={style.cardcontainer}>
+                {page ? page.map(c => {
+                    return(<Link key={c.ID} to={`/country/${c.ID}`} onClick={() => dispatch(countryDetail({
+                        ID: c.ID, 
+                        name: c.name, 
+                        urlImg: c.urlImg, 
+                        continent: c.continent, 
+                        capital: c.capital,
+                        area: c.area,
+                        poblacion: c.poblacion,
+                        activities: c.activities
                     }))}>
-                    <Country name={c.name} urlImg={c.urlImg} continent={c.continent} />
-                </Link>)
-            }): <h2>No hay paises en la base de datos</h2>}
-        </div>
+                        <Country name={c.name} urlImg={c.urlImg} continent={c.continent} />
+                    </Link>)
+                }): <h2>No hay paises en la base de datos</h2>}
+            </div>
+            <Paginator />
+        </>
     )
 }

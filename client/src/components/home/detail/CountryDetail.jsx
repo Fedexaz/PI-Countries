@@ -14,7 +14,7 @@ export default function CountryDetail() {
         <p>Código: {pais.ID}</p>
         <p>Capital: {pais.capital}</p>
         <p>Superficie: {pais.area / 1000} km2</p>
-        <p>Población: {(pais.poblacion / 1000000).toFixed(2)} millones de personas</p>
+        <p>Población: {pais.poblacion}</p>
         {pais.activities.length > 0 ? <p>Actividades</p> : null}
         <ul>{pais.activities?.map(a => {
           return <li key={a.ID}>{a.name}</li>

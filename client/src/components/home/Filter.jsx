@@ -5,6 +5,7 @@ export default function Filter() {
     <>
       <button>Filtrar por Continente</button>
       <button>Filtrar por Tipo Actividad Turistica</button>
+      <button>Borrar filtros</button>
     </>
   )
 }
