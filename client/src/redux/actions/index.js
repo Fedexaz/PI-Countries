@@ -1,8 +1,15 @@
 import axios from 'axios';
 
+export function paginarCountries(payload){ 
+    return {
+        type: "PAGINAR_COUNTRIES",
+        payload
+    }
+}
+
 export function addActividad(name, dificultad, duracion, temporada, idPais){
     return function (dispatch){
-        return axios.post('http://localhost:3001/activity/', {
+        axios.post('http://localhost:3001/activity/', {
             name,
             dificultad,
             duracion,
@@ -27,40 +34,33 @@ export function addActividad(name, dificultad, duracion, temporada, idPais){
     }          
 }
 
-export function changePage(payload){
-    return {
-        type: "CHANGE_PAGE",
-        payload
-    }
-}
-
 export function loadCountries(){
     return function (dispatch){
-        return axios.get('http://localhost:3001/countries/')
-            .then(datos => {
-                return dispatch({
-                    type: "LOAD_COUNTRIES",
-                    payload: datos.data
-                })
+        axios.get('http://localhost:3001/countries/')
+        .then(datos => {
+            return dispatch({
+                type: "LOAD_COUNTRIES",
+                payload: datos.data
             })
-            .catch(e => {
-                console.log(e)
-            })  
+        })
+        .catch(e => {
+            console.log(e)
+        })  
     }
 }
 
 export function searchCountry(country){
     return function (dispatch){
         axios.get(`http://localhost:3001/countries/?name=${country}`)
-            .then(datos => {
-                return dispatch({
-                    type: "SEARCH_COUNTRY",
-                    payload: datos.data
-                })
+        .then(datos => {
+            return dispatch({
+                type: "SEARCH_COUNTRY",
+                payload: datos.data
             })
-            .catch(e => {
-                console.log(e)
-            })  
+        })
+        .catch(e => {
+            console.log(e)
+        })  
     }
 }
 

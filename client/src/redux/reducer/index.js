@@ -1,17 +1,28 @@
 const initialState = {
+    countriesPages: [],
     countries: [],
-    page: [],
     activities: [],
     countryDetail: {}
 }
 
+function mapCountriesPages(paises){
+    let arreglo = []
+    let primerosNueve = paises.slice(0, 9)
+    let paisesQueSiguen = paises.splice(0, 10)
+    let paginasTotales = Math.ceil(paisesQueSiguen.length / 10)
+    for(let i = 0; i < paginasTotales.length; i++){
+        i===0 ? arreglo.push(primerosNueve) : arreglo.push(paisesQueSiguen.slice(i*10, 10 * (i+1)))
+    }
+    return arreglo
+}
+
 export default function reducer(state = initialState, action){
+
     switch(action.type){
-        
-        case "CHANGE_PAGE":{
+        case "PAGINAR_COUNTRIES":{
             return {
                 ...state,
-                page: action.payload
+                countriesPages: mapCountriesPages(action.payload)
             }
         }
 
@@ -53,28 +64,60 @@ export default function reducer(state = initialState, action){
         case "ORDEN_ALFABETICO_ASC":{
             return {
                 ...state,
-                countries: state.countries.sort((a, b) => a.name - b.name)
+                countries: state.countries.sort((a, b) => {
+                    if (a.name < b.name) {
+                        return -1;
+                    }
+                    if (b.name < a.name) {
+                        return 1;
+                    }
+                    return 0;
+                })
             }
         }
         
         case "ORDEN_ALFABETICO_DESC":{
             return {
                 ...state,
-                countries: state.countries.sort((a, b) => a.name > b.name)
+                countries: state.countries.sort((a, b) => {
+                    if (a.name > b.name) {
+                        return -1;
+                    }
+                    if (b.name > a.name) {
+                        return 1;
+                    }
+                    return 0;
+                })
             }
         }
         
         case "ORDEN_POBLACION_ASC":{
             return {
                 ...state,
-                countries: state.countries.sort((a, b) => a.poblacion - b.poblacion)
+                countries: state.countries.sort((a, b) => {
+                    if (a.poblacion < b.poblacion) {
+                        return -1;
+                    }
+                    if (b.poblacion < a.poblacion) {
+                        return 1;
+                    }
+                    return 0;
+                })
             }
         }
         
         case "ORDEN_POBLACION_DESC":{
             return {
                 ...state,
-                countries: state.countries.sort((a, b) => a.poblacion > b.poblacion)
+                countries: state.countries.sort((a, b) => {
+                    if (a.poblacion > b.poblacion) {
+                        return -1;
+                    }
+                    if (b.poblacion > a.poblacion) {
+                        return 1;
+                    }
+                    return 0;
+                })
             }
         }
 
