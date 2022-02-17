@@ -6,14 +6,12 @@ import '../spinner.css'
 import { useDispatch, /* useSelector */ } from 'react-redux';
 import { loadCountries } from '../../redux/actions';
 
-export default function LandingPage() {
-    //const paises = useSelector(state => state.countries)
-    
+export default function LandingPage() {    
     const dispatch = useDispatch()
 
     useEffect(() => {
         dispatch(loadCountries())
-    }, [])
+    }, [dispatch])
 
   return (
     <div className={style.container}>

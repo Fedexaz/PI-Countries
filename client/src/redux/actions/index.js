@@ -1,5 +1,19 @@
 import axios from 'axios';
 
+export function filterAndOrder(payload){
+    return {
+        type: "APPLY_FILTER_AND_ORDER",
+        payload
+    }
+}
+
+export function loadingState(payload){
+    return {
+        type: "SET_LOADING",
+        payload
+    }
+}
+
 export function addActividad(name, dificultad, duracion, temporada, idPais){
     return function (dispatch){
         axios.post('http://localhost:3001/activity/', {

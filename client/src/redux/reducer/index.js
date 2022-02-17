@@ -1,13 +1,28 @@
 const initialState = {
-    countriesPages: [],
     countries: [],
     activities: [],
-    countryDetail: {}
+    countryDetail: {},
+    loading: false,
+    applyFilterAndOrder: false
 }
 
 export default function reducer(state = initialState, action){
 
     switch(action.type){
+        case "APPLY_FILTER_AND_ORDER":{
+            return {
+                ...state,
+                applyFilterAndOrder: action.payload
+            }
+        }
+
+        case "SET_LOADING":{
+            return {
+                ...state,
+                loading: action.payload
+            }
+        }
+
         case "AGREGAR_ACTIVIDAD":{
             return {
                 ...state,
@@ -46,6 +61,7 @@ export default function reducer(state = initialState, action){
         case "ORDEN_ALFABETICO_ASC":{
             return {
                 ...state,
+                loading: true,
                 countries: state.countries.sort((a, b) => {
                     if (a.name < b.name) {
                         return -1;
@@ -61,6 +77,7 @@ export default function reducer(state = initialState, action){
         case "ORDEN_ALFABETICO_DESC":{
             return {
                 ...state,
+                loading: true,
                 countries: state.countries.sort((a, b) => {
                     if (a.name > b.name) {
                         return -1;
@@ -76,6 +93,7 @@ export default function reducer(state = initialState, action){
         case "ORDEN_POBLACION_ASC":{
             return {
                 ...state,
+                loading: true,
                 countries: state.countries.sort((a, b) => {
                     if (Number(a.poblacion) < Number(b.poblacion)) {
                         return -1;
@@ -91,6 +109,7 @@ export default function reducer(state = initialState, action){
         case "ORDEN_POBLACION_DESC":{
             return {
                 ...state,
+                loading: true,
                 countries: state.countries.sort((a, b) => {
                     if (Number(a.poblacion) > Number(b.poblacion)) {
                         return -1;
