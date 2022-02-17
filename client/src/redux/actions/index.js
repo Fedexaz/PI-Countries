@@ -1,12 +1,5 @@
 import axios from 'axios';
 
-export function paginarCountries(payload){ 
-    return {
-        type: "PAGINAR_COUNTRIES",
-        payload
-    }
-}
-
 export function addActividad(name, dificultad, duracion, temporada, idPais){
     return function (dispatch){
         axios.post('http://localhost:3001/activity/', {

@@ -1,10 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 import style from './css/landing.module.css'
 import '../spinner.css'
+import { useDispatch, /* useSelector */ } from 'react-redux';
+import { loadCountries } from '../../redux/actions';
 
 export default function LandingPage() {
+    //const paises = useSelector(state => state.countries)
+    
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(loadCountries())
+    }, [])
+
   return (
     <div className={style.container}>
       <h1 className={style.title}>Countries PI</h1>
