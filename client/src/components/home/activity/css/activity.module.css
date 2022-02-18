@@ -50,6 +50,13 @@
     justify-content: space-around;
 }
 
+.container > span{
+    color: brown;
+    font-size: 13px;
+    background-color: white;
+    margin-bottom: 10px;
+}
+
 .container > select{
     margin-left: auto;
     margin-right: auto;
