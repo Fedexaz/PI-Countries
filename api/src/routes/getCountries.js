@@ -12,7 +12,7 @@ const loadDB = async () => {
         const respuesta = await axios.get('https://restcountries.com/v3/all')
 
         try {
-            respuesta.data.forEach(async (e) => {
+            respuesta.data.forEach(async (e) => { 
                 let cap = "None";
 
                 if(Array.isArray(e.capital)){

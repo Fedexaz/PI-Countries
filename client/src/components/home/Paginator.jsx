@@ -25,13 +25,13 @@ export default function Paginator() {
 
   const getPaginatedData = () => {
     const startIndex = currentPage === 1 ? 0 : currentPage * 10 - 10;
-    const endIndex =   currentPage === 1 ? 9 : startIndex + 10;
+    const endIndex = currentPage === 1 ? 9 : startIndex + 10;
     return data.slice(startIndex, endIndex);
   };
 
   const getPaginationGroup = () => {
     const start = Math.ceil(data.length / 10)
-    return new Array(start).fill().map((_, idx) => idx + 1)
+    return new Array(start).fill().map((_, i) => i + 1)
   };
 
   useEffect(() => {
@@ -40,11 +40,10 @@ export default function Paginator() {
   }, [currentPage]);
 
   useEffect(()=>{
-      if(filtradoUOrdenado === true){
+      if(filtradoUOrdenado){
         setCurrentPage(1)
         dispatch(loadingState(false))
         dispatch(filterAndOrder(false))
-        console.log("se aplico filtro u ordenado")
       }
   }, [filtradoUOrdenado, dispatch])
 
