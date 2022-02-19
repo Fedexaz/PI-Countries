@@ -4,40 +4,45 @@ const { Country, Activity } = require("../db");
 const route = Router()
 
 const crearActividad = async (name, dificultad, duracion, temporada, idPais) => {
-    const act = await Activity.create({
-        name,
-        dificultad,
-        duracion,
-        temporada
-    })
-
-    await act.addCountry(idPais)
-    console.log("Actividad agregada")
+    try {
+        const act = await Activity.create({
+            name,
+            dificultad,
+            duracion,
+            temporada
+        }) 
+        await act.addCountry(idPais)
+        console.log("Actividad "+ act +" agregada")
+    } catch (e) {
+        console.log(e);
+    }
 }
 
 route.post('/', /* async */ (req, res) => {
     const { name, dificultad, duracion, temporada, idPais } = req.body;
 
+    idPais.forEach((e) =>{
+        crearActividad(name, dificultad, duracion, temporada, e)
+    })
+
+    res.status(201).json({
+        msg: `Actividades '${name}' creada correctamente!`
+    });
+})
+
+route.get('/', async (req, res) => {
     
-    if(Array.isArray(idPais)){
-        idPais.forEach((e, i) =>{
-            crearActividad(name, dificultad, duracion, temporada, e)
-        })
-        res.status(201).json({
-            msg: `Actividades '${name}' creada correctamente!`
-        });
-    }else{
-        crearActividad(name, dificultad, duracion, temporada, idPais)
-        res.status(201).json({
-            msg: `Actividad '${name}' creada en '${idPais}' correctamente!`
-        });
+    const result = await Activity.findAll();
+
+    let array = []
+
+    for(let i = 0; i < result.length; i++){
+        if(array.indexOf(result[i].name) === -1){
+            array.push(result[i].name)
+        }
     }
 
-    /* const result = await Activity.findAll({
-        include: Country
-    })
-    console.log("-------------------------> \n",result);
-    res.send(result) */
+    res.send(array);
 })
 
 module.exports = route;

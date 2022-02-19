@@ -25,7 +25,7 @@ const loadDB = async () => {
                     urlImg: e.flags[1],
                     continent: e.region,
                     capital: cap,
-                    subregion: e.subregion,
+                    subregion: !e.subregion ? 'Antartic' : e.subregion,
                     area: e.area,
                     poblacion: e.population
                 })

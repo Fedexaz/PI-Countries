@@ -59,14 +59,10 @@ export default function reducer(state = initialState, action){
         case "FILTRAR_ACTIVIDAD":{
 
             state.countries = state.countriesBackup;
-            console.log(state.countries)
 
             return {
                 ...state,
-                countries: state.countries.filter(e => {
-                    e.activities.map()
-                    String(e.activities.name).toLowerCase() === String(action.payload).toLowerCase()
-                })
+                countries: state.countries.filter(el => el.activities.find(e => (e.name).toLowerCase() === (action.payload).toLowerCase()))
             }
         }
         

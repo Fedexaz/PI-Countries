@@ -1,17 +1,24 @@
 import React, { useState } from 'react'
+import axios from 'axios'
+
+import { useDispatch } from 'react-redux'
+
+import { addActividad } from '../../../redux/actions'
 
 import NavBar2 from '../NavBar2'
 
 import style from './css/activity.module.css'
 
 export default function Activity() {
+
+    const dispatch = useDispatch();
+
     const [input, setInput] = useState({
         name: '',
         dificultad: 0,
         duracion: 0,
-        temporada: 'verano',
-        pais: [],
-        disabled: true
+        temporada: '',
+        pais: []
     })
 
     const [error, setError] = useState({
@@ -21,6 +28,8 @@ export default function Activity() {
         temporada: '',
         pais: '',
     })
+
+    const [bPaises, setBPaises] = useState([])
 
     function handleChange(e){
         const { name, value } = e.target;
@@ -67,10 +76,49 @@ export default function Activity() {
             ...input,
             [name]: value
         })
+
+    }
+    
+    function validarForm(){
+        let valid = true;
+        
+        if(input.pais.length === 0) valid = false
+
+        if(input.name.length <= 2) valid = false
+
+        if(input.dificultad === 0) valid = false
+
+        if(input.duracion === 0) valid = false
+
+        if(input.temporada === '' || input.temporada === 'seleccionar') valid = false
+        
+        return valid;
+    }
+
+    async function buscarPais(e){
+        try {
+            const resultados = await axios.get(`http://localhost:3001/countries?name=${e.target.value}`)
+            setBPaises(resultados.data)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    function agregarPais(idPais){
+        setInput({
+            ...input,
+            pais: input.pais.indexOf(idPais) === -1 ? [...input.pais, idPais] : [...input.pais]
+        })
     }
 
     function handleSubmit(e){
         e.preventDefault()
+        if(validarForm()){
+            dispatch(addActividad(input.name, input.dificultad, input.duracion, input.temporada, input.pais))
+            alert("Actividad agregada correctamente!")
+        }else{
+            alert("ERROR: Faltan completar algunos campos!")
+        }
     }
 
     return (
@@ -93,38 +141,41 @@ export default function Activity() {
 
             <label htmlFor='temporada'>Temporada de la actividad:</label>
             <select name="temporada" id="temporada" value={input.temporada} onChange={handleChange}>
-                <option value="seleccionar" selected>Seleccionar...</option>
+                <option value="seleccionar">Seleccionar...</option>
                 <option value="invierno">Invierno</option>
                 <option value="otonio">Otoño</option>
                 <option value="primavera">Primavera</option>
                 <option value="verano">Verano</option>
             </select>
             {error.temporada.length ? <span>{error.temporada}</span> : null }
-
-            <label htmlFor="paisAct">¿En que país está la actividad?</label>
-            <input type="text" name="bpais" placeholder='Escribe el nombre de algún país a agregar...'/>
-            {true ?
-                <div className={style.contenedorBuscador}>
-                    <div id="paisesContainer">
-                        <h4>Paises encontrados</h4>
-                        <ul className={style.lista}>
-                            <li>Argentina <button>Agregar</button></li>
-                        </ul>
-                    </div>
+            <br />
+            <label htmlFor="bpais">¿En que país está la actividad?</label>
+            <input type="text" id="bpais" name="bpais" placeholder='Escribe el nombre de algún país a agregar...' onChange={buscarPais}/>
+            {bPaises.length > 0 ?
+            <div className={style.contenedorBuscador}>
+                <div id="paisesContainer">
+                    <h4>Paises encontrados</h4>
+                    <ul className={style.lista}>
+                        {bPaises?.map(e=>{
+                            return (
+                                    <li key={e.ID}>{e.name} <span className={style.addButton} onClick={(evento) => agregarPais(e.ID)}>Agregar</span></li>
+                                )
+                            }) 
+                        }
+                    </ul>
                 </div>
+            </div>
             : null
             }
             <hr />
-            {true ?
+            {input.pais.length > 0 ?
                 <div className={style.contenedorPaises}>
                     <div id="paisesContainer">
                         <h4>Paises con la actividad</h4>
                         <ul className={style.lista}>
-                            <li>Argentina <button>X</button></li>
-                            <li>Argentina <button>X</button></li>
-                            <li>Argentina <button>X</button></li>
-                            <li>Argentina <button>X</button></li>
-                            <li>Argentina <button>X</button></li>
+                            {
+                                input.pais?.map(e => <li key={e}>{e}</li>)
+                            }
                         </ul>
                     </div>
                 </div>
