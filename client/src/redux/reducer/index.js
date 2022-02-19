@@ -1,5 +1,6 @@
 const initialState = {
     countries: [],
+    countriesBackup:[],
     activities: [],
     countryDetail: {},
     loading: false,
@@ -26,14 +27,15 @@ export default function reducer(state = initialState, action){
         case "AGREGAR_ACTIVIDAD":{
             return {
                 ...state,
-                activities: state.activities.push(action.payload),
+                activities: [...state.activities, action.payload]
             }
         }
 
         case "LOAD_COUNTRIES":{
             return {
                 ...state,
-                countries: action.payload
+                countries: action.payload,
+                countriesBackup: action.payload
             }
         }
         
@@ -45,6 +47,9 @@ export default function reducer(state = initialState, action){
         }
         
         case "FILTRAR_CONTINENTE":{
+            
+            state.countries = state.countriesBackup;
+
             return {
                 ...state,
                 countries: state.countries.filter(e => e.continent === action.payload)
@@ -52,9 +57,16 @@ export default function reducer(state = initialState, action){
         }
         
         case "FILTRAR_ACTIVIDAD":{
+
+            state.countries = state.countriesBackup;
+            console.log(state.countries)
+
             return {
                 ...state,
-                countries: state.countries.filter(e => e.activities.name === action.payload)
+                countries: state.countries.filter(e => {
+                    e.activities.map()
+                    String(e.activities.name).toLowerCase() === String(action.payload).toLowerCase()
+                })
             }
         }
         
