@@ -2,41 +2,54 @@ import React from 'react'
 
 import { useDispatch } from 'react-redux'
 
-import { filterAndOrder, loadingState, ordenAlfabetico, ordenCantidadPoblacion } from '../../redux/actions';
+import { filterAndOrder, loadCountries, loadingState, ordenAlfabetico, ordenCantidadPoblacion } from '../../redux/actions';
+
+import style from './css/filterandorder.module.css'
 
 export default function Ordenar() {
   const dispatch = useDispatch();
   
   return (
     <>
-      <button onClick={(e) => {
-          dispatch(ordenAlfabetico('asc'))
-          dispatch(loadingState(false))
-          dispatch(filterAndOrder(true))
-        } 
-      }>Ordenar por Orden Alfabético ASC</button>
-
-      <button onClick={(e) => {
-          dispatch(ordenAlfabetico('desc'))
-          dispatch(loadingState(false))
-          dispatch(filterAndOrder(true))
+      <select className={style.button} name="ordenAlfabetico" id="ordenAlfabetico" onChange={(e) => {
+          if(e.target.value !== 'sel'){
+            dispatch(ordenAlfabetico(e.target.value))
+            dispatch(loadingState(false))
+            dispatch(filterAndOrder(true))
+            document.getElementById('ordenPoblacion').value="sel"
+          } else {
+            dispatch(loadCountries())
+            dispatch(loadingState(false))
+            dispatch(filterAndOrder(true))
+            document.getElementById('ordenPoblacion').value="sel"
+            document.getElementById('ordenAlfabetico').value="sel"
+          }
         }
-      }>Ordenar por Orden Alfabético DESC</button>
+      }>
+        <option value="sel">Orden Alfabetico</option>
+        <option value="asc">A - Z</option>
+        <option value="desc">Z - A</option>
+      </select>
       
-      <button onClick={(e) => {
-          dispatch(ordenCantidadPoblacion('asc'))
-          dispatch(loadingState(false))
-          dispatch(filterAndOrder(true))
+      <select className={style.button} name="ordenPoblacion" id="ordenPoblacion" onChange={(e) => {
+          if(e.target.value !== 'sel'){
+            dispatch(ordenCantidadPoblacion(e.target.value))
+            dispatch(loadingState(false))
+            dispatch(filterAndOrder(true))
+            document.getElementById('ordenAlfabetico').value="sel"
+          } else {
+            dispatch(loadCountries())
+            dispatch(loadingState(false))
+            dispatch(filterAndOrder(true))
+            document.getElementById('ordenPoblacion').value="sel"
+            document.getElementById('ordenAlfabetico').value="sel"
+          }
         }
-      }>Ordenar por Población ASC</button>
-      
-      <button onClick={(e) => {
-          dispatch(ordenCantidadPoblacion('desc'))
-          dispatch(loadingState(false))
-          dispatch(filterAndOrder(true))
-        }
-      }>Ordenar por Población DESC</button>
-    
+      }>
+        <option value="sel">Orden Poblacion</option>
+        <option value="asc">Ascendente</option>
+        <option value="desc">Descendente</option>
+      </select>
     </>
   )
 }

@@ -5,7 +5,8 @@ import SearchBar from './SearchBar'
 export default function NavBar() {
   return (
     <>
-        <Link to="/">Ir a Landing Page</Link>
+        <Link to="/home">Ir a home</Link>
+        <Link to="/">Ir a Inicio</Link>
         <SearchBar />
     </>
   )

@@ -1,12 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@1,300&display=swap');
-
 body{
-    font-family: 'Roboto Mono', monospace;
     background-image: url("https://www.wendyperrin.com/wp-content/uploads/2020/06/World-globe-shutterstock_1384546052.jpg");
     background-size: 100%;
     background-repeat: no-repeat;
     background-attachment:fixed;
-    
+    backdrop-filter: blur(1px) grayscale(80%);
 }
 
 .container{
@@ -21,7 +18,7 @@ body{
 
 .title{
     color: black;
-    font-size: 50px;
+    font-size: 60px;
 }
 
 .boton{
@@ -46,8 +43,7 @@ body{
 }
 
 .copyright{
-    margin-top: 24%;
+    margin-top: 22.5%;
     margin-left: -2%;
-    
     color: black;
 }
