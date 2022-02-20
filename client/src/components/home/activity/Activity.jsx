@@ -128,7 +128,7 @@ export default function Activity() {
             <h1>Agregar actividad Turística</h1>
 
             <label htmlFor="name">Nombre de la actividad:</label>
-            <input type="text" name="name" id="name" placeholder='Ingresa un nombre' value={input.name} onChange={handleChange} />
+            <input role="nameAct" type="text" name="name" id="name" placeholder='Ingresa un nombre' value={input.name} onChange={handleChange} />
             {error.name.length ? <span>{error.name}</span> : null }
 
             <label htmlFor="dificultad">Dificultad de la actividad:</label>

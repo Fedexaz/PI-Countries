@@ -7,7 +7,7 @@ import Activity from './components/home/activity/Activity';
 
 function App() {
   return (
-    <div>
+    <>
       <Route path='/' exact>
         <LandingPage />
       </Route>
@@ -23,7 +23,7 @@ function App() {
       <Route path="/activity" exact>
         <Activity />
       </Route>
-    </div>
+    </>
   );
 }
 
