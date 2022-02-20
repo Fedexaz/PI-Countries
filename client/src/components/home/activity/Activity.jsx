@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 
+import { Link } from 'react-router-dom'
+
 import { useDispatch } from 'react-redux'
 
 import { addActividad } from '../../../redux/actions'
-
-import NavBar2 from '../NavBar2'
 
 import style from './css/activity.module.css'
 
@@ -117,13 +117,13 @@ export default function Activity() {
             dispatch(addActividad(input.name, input.dificultad, input.duracion, input.temporada, input.pais))
             alert("Actividad agregada correctamente!")
         }else{
-            alert("ERROR: Faltan completar algunos campos!")
+            alert("ERROR: Faltan completar algunos campos!");
         }
     }
 
     return (
       <>
-        <NavBar2 />
+        <Link className={style.button} to='/home'>back</Link>
         <form className={style.container} method="POST" onSubmit={handleSubmit}>
             <h1>Agregar actividad Turística</h1>
 
@@ -152,33 +152,37 @@ export default function Activity() {
             <label htmlFor="bpais">¿En que país está la actividad?</label>
             <input type="text" id="bpais" name="bpais" placeholder='Escribe el nombre de algún país a agregar...' onChange={buscarPais}/>
             {bPaises.length > 0 ?
-            <div className={style.contenedorBuscador}>
-                <div id="paisesContainer">
-                    <h4>Paises encontrados</h4>
-                    <ul className={style.lista}>
-                        {bPaises?.map(e=>{
-                            return (
-                                    <li key={e.ID}>{e.name} <span className={style.addButton} onClick={(evento) => agregarPais(e.ID)}>Agregar</span></li>
-                                )
-                            }) 
-                        }
-                    </ul>
-                </div>
-            </div>
-            : null
-            }
-            <hr />
-            {input.pais.length > 0 ?
-                <div className={style.contenedorPaises}>
+            <>
+            <h4>Paises encontrados</h4>
+                <div className={style.contenedorBuscador}>
                     <div id="paisesContainer">
-                        <h4>Paises con la actividad</h4>
                         <ul className={style.lista}>
-                            {
-                                input.pais?.map(e => <li key={e}>{e}</li>)
+                            {bPaises?.map(e=>{
+                                return (
+                                        <li key={e.ID}>{e.name} <span className={style.addButton} onClick={(evento) => agregarPais(e.ID)}>Agregar</span></li>
+                                    )
+                                }) 
                             }
                         </ul>
                     </div>
                 </div>
+            </>
+            : null
+            }
+            <hr />
+            {input.pais.length > 0 ?
+                <>
+                    <h4>Paises con la actividad</h4>
+                    <div className={style.contenedorPaises}>
+                        <div id="paisesContainer">
+                            <ul className={style.lista}>
+                                {
+                                    input.pais?.map(e => <li key={e}>{e}</li>)
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </>
             : null
             }
             <button type="submit">Agregar actividad</button>

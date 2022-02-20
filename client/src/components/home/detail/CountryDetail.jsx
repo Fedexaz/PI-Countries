@@ -1,13 +1,16 @@
 import React from 'react'
+
+import { Link } from 'react-router-dom'
+
 import { useSelector } from 'react-redux'
-import NavBar2 from '../NavBar2'
+
 import style from './css/countrydetail.module.css'
 
 export default function CountryDetail() {
   const pais = useSelector(state => state.countryDetail)
   return (
     <>
-    <NavBar2 />
+    <Link className={style.button} to='/home'>back</Link>
     <div className={style.container}>
         <img src={pais.urlImg} alt="argentina" />
         <h1>{pais.name}</h1>

@@ -8,8 +8,8 @@ import FilterAndOrder from './FilterAndOrder'
 export default function Home() {
   return (
     <>
-      <Link to="/activity" className={style.addActivity}>Agregar actividad</Link>
-      <div className={style.blur}>
+      <div className={style.navContainer}>
+        <Link to="/activity" className={style.addActivity}>Agregar actividad</Link>
         <FilterAndOrder />
       </div>
       <Countries />

@@ -27,13 +27,13 @@ body{
     text-decoration: none;
     background-color: black;
     color: white;
-    border: 5px solid rgb(255, 255, 255);
-    transition: 0.2s;
+    border: 3px solid rgb(255, 255, 255);
+    transition: 0.1s;
 }
 
 .boton:hover{
     color: black;
-    border: 5px solid black;
+    border: 3px solid black;
     background-color: white;
     transform: scale(1.05);
 }

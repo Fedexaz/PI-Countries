@@ -4,6 +4,7 @@
     background-color: white;
     color:black;
     padding: 10px;
+    margin: 3px;
     border: 3px solid black;
     transition: .1s;
 }
@@ -11,4 +12,14 @@
 .addActivity:hover{
     background-color: black;
     color: white;
+}
+
+.navContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-top: 1px solid black;
+    padding-top: 4px;
+    border-bottom: 1px solid black;
+    padding-bottom: 4px;
 }

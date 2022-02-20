@@ -12,14 +12,16 @@
 }
 
 .paginatorcontainer > button{
-    border-radius: 10px;
+    border-radius: 3px;
     padding: 10px;
     text-decoration: none;
-    border: none;
-    transition: .3s;
+    border: 1px solid black;
+    transition: .05s;
 }
 
 .paginatorcontainer > button:hover{
     transform: scale(1.02);
-    background-color: blueviolet;
+    cursor:pointer;
+    background-color: black;
+    color: white;
 }

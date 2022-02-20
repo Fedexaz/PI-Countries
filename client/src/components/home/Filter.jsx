@@ -80,7 +80,7 @@ export default function Filter() {
           document.getElementById('ordenAlfabetico').value="sel"
         }
       }>
-      Borrar filtros</button>
+      BORRAR FILTROS</button>
     </>
   )
 }

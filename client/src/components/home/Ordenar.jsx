@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 
 import { filterAndOrder, loadCountries, loadingState, ordenAlfabetico, ordenCantidadPoblacion } from '../../redux/actions';
 
-import style from './css/filterandorder.module.css'
+import style from './css/filterandorder.module.css';
 
 export default function Ordenar() {
   const dispatch = useDispatch();
