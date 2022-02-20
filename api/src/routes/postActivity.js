@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { Country, Activity } = require("../db");
+const { Activity } = require("../db");
 
 const route = Router()
 
@@ -12,7 +12,6 @@ const crearActividad = async (name, dificultad, duracion, temporada, idPais) => 
             temporada
         }) 
         await act.addCountry(idPais)
-        console.log("Actividad "+ act +" agregada")
     } catch (e) {
         console.log(e);
     }
@@ -21,13 +20,20 @@ const crearActividad = async (name, dificultad, duracion, temporada, idPais) => 
 route.post('/', /* async */ (req, res) => {
     const { name, dificultad, duracion, temporada, idPais } = req.body;
 
-    idPais.forEach((e) =>{
-        crearActividad(name, dificultad, duracion, temporada, e)
-    })
+    if(name && dificultad && duracion && temporada && idPais){
+        idPais.forEach((e) =>{
+            crearActividad(name, dificultad, duracion, temporada, e)
+        })
 
-    res.status(201).json({
-        msg: `Actividades '${name}' creada correctamente!`
-    });
+        res.status(201).json({
+            msg: `Actividades '${name}' creada correctamente!`
+        });
+    }
+    else{
+        res.status(400).send({
+            msg: "Faltan algunos campos para agregar la actividad"
+        })
+    }
 })
 
 route.get('/', async (req, res) => {

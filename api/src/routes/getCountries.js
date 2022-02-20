@@ -61,11 +61,11 @@ route.get('/', async (req, res) => {
             })
         }
 
-        res.json(resultado)
+        res.status(200).json(resultado)
     }
     else{
         const resultado = await Country.findAll({include: Activity})
-        res.send(resultado)
+        res.status(200).send(resultado)
     }
 
 })
