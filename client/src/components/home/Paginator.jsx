@@ -67,7 +67,7 @@ export default function Paginator() {
             }))}>
             <Country name={c.name} urlImg={c.urlImg} continent={c.continent} />
           </Link>)
-        })): <img src="https://www.surjen.com/resources/assets/frontend/img/nodatafound.png" width="400px" alt="no-data" />
+        })): <img src="https://www.surjen.com/resources/assets/frontend/img/nodatafound.png" alt="no-data" />
         :
         <h1>Cargando...</h1>
       }
