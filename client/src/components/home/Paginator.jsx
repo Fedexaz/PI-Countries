@@ -52,6 +52,7 @@ export default function Paginator() {
     <div className={style.cardcontainer}>
       {
         !loading ?
+        data.length ?
         getPaginatedData()?.map((c => {
           return(
           <Link key={c.ID} to={`/country/${c.ID}`} onClick={() => dispatch(countryDetail({
@@ -66,7 +67,7 @@ export default function Paginator() {
             }))}>
             <Country name={c.name} urlImg={c.urlImg} continent={c.continent} />
           </Link>)
-        }))
+        })): <img src="https://www.surjen.com/resources/assets/frontend/img/nodatafound.png" width="400px" alt="no-data" />
         :
         <h1>Cargando...</h1>
       }
