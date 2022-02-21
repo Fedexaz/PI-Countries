@@ -40,3 +40,9 @@
     background-color: black;
     color: white;
 }
+
+.actDetail{
+    background-color: rgb(162, 161, 160);
+    color: black;
+    padding: 15px;
+}

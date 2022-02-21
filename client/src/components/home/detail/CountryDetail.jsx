@@ -20,7 +20,7 @@ export default function CountryDetail() {
         <p>Población: {pais.poblacion}</p>
         {pais.activities.length > 0 ? <p>Actividades</p> : null}
         <ul>{pais.activities?.map(a => {
-          return <li key={a.ID}>{a.name}</li>
+          return <li className={style.actDetail} key={a.ID}>Nombre: {a.name} <br /> Dificultad: {a.dificulad} <br /> Duración {a.duracion} horas <br /> Temporada: {a.temporada}</li>
         })}</ul>
     </div>
     </>

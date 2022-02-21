@@ -15,6 +15,7 @@ export default function LandingPage() {
     const dispatch = useDispatch()
 
     useEffect(() => {
+        document.title = "Countries PI"
         dispatch(loadCountries())
     }, [dispatch])
 
