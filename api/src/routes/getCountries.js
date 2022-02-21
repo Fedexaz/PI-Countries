@@ -6,15 +6,13 @@ const axios = require('axios');
 const route = Router();
 
 const loadDB = async () => {
+    console.log("Cargando datos...")
     const existe = await Country.findByPk('ARG');
-
     if(!existe){
-        const respuesta = await axios.get('https://restcountries.com/v3/all')
-
-        try {
-            respuesta.data.forEach(async (e) => { 
+        axios.get('https://restcountries.com/v3/all')
+        .then(respuesta => {
+            respuesta.data.forEach(async (e) => {
                 let cap = "None";
-
                 if(Array.isArray(e.capital)){
                     cap = e.capital.pop();
                 }
@@ -25,15 +23,16 @@ const loadDB = async () => {
                     urlImg: e.flags[1],
                     continent: e.region,
                     capital: cap,
-                    subregion: !e.subregion ? 'Antartic' : e.subregion,
+                    subregion: !e.subregion ? 'Antarctic' : e.subregion,
                     area: e.area,
                     poblacion: e.population
                 })
             })
             console.log("Datos traidos de la API y cargados en la DB");
-        } catch (e) {
+        })
+        .catch (e => {
             console.log(e);
-        }
+        })
     }
     else{
         console.log("Base de datos cargada!")
