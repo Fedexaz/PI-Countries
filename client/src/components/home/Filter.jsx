@@ -14,7 +14,7 @@ export default function Filter() {
 
   useEffect(() =>{
     async function cargarActividades(){
-      const response = await axios.get('http://localhost:3001/activity/')
+      const response = await axios.get('/activity')
       if(response)setActivities(response.data)
     }
     cargarActividades()
