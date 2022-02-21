@@ -40,7 +40,7 @@ const loadDB = async () => {
     }
 }
 
-//loadDB()
+loadDB()
 
 route.get('/', async (req, res) => {
     const { name } = req.query;  
