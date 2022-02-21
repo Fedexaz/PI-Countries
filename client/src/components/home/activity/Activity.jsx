@@ -97,7 +97,7 @@ export default function Activity() {
 
     async function buscarPais(e){
         try {
-            const resultados = await axios.get(`http://localhost:3001/countries?name=${e.target.value}`)
+            const resultados = await axios.get(`/countries?name=${e.target.value}`)
             setBPaises(resultados.data)
         } catch (error) {
             console.log(error);
@@ -128,7 +128,7 @@ export default function Activity() {
             <h1>Agregar actividad Turística</h1>
 
             <label htmlFor="name">Nombre de la actividad:</label>
-            <input role="nameAct" type="text" name="name" id="name" placeholder='Ingresa un nombre' value={input.name} onChange={handleChange} />
+            <input type="text" name="name" id="name" placeholder='Ingresa un nombre' value={input.name} onChange={handleChange} />
             {error.name.length ? <span>{error.name}</span> : null }
 
             <label htmlFor="dificultad">Dificultad de la actividad:</label>

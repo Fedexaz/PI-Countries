@@ -16,7 +16,7 @@ export function loadingState(payload){
 
 export function addActividad(name, dificultad, duracion, temporada, idPais){
     return function (dispatch){
-        axios.post('http://localhost:3001/activity/', {
+        axios.post('/activity', {
             name,
             dificultad,
             duracion,
@@ -43,7 +43,7 @@ export function addActividad(name, dificultad, duracion, temporada, idPais){
 
 export function loadCountries(){
     return function (dispatch){
-        axios.get('http://localhost:3001/countries/')
+        axios.get('/countries')
         .then(datos => {
             return dispatch({
                 type: "LOAD_COUNTRIES",
@@ -58,7 +58,7 @@ export function loadCountries(){
 
 export function searchCountry(country){
     return function (dispatch){
-        axios.get(`http://localhost:3001/countries/?name=${country}`)
+        axios.get(`/countries?name=${country}`)
         .then(datos => {
             return dispatch({
                 type: "SEARCH_COUNTRY",

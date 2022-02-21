@@ -42,6 +42,6 @@ describe('Componente formulario Activity', () => {
         </BrowserRouter>
       </Provider>
     )
-    expect(screen.getByRole('nameAct')).toBeInTheDocument()
+    expect(screen.getByText(/nombre/ig)).toBeInTheDocument()
   });
 })
