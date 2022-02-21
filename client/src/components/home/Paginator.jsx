@@ -53,21 +53,26 @@ export default function Paginator() {
       {
         !loading ?
         data.length ?
-        getPaginatedData()?.map((c => {
-          return(
-          <Link key={c.ID} to={`/country/${c.ID}`} onClick={() => dispatch(countryDetail({
-              ID: c.ID,
-              name: c.name,
-              urlImg: c.urlImg,
-              continent: c.continent,
-              capital: c.capital,
-              area: c.area,
-              poblacion: c.poblacion,
-              activities: c.activities
-            }))}>
-            <Country name={c.name} urlImg={c.urlImg} continent={c.continent} />
-          </Link>)
-        })): <img src="https://www.surjen.com/resources/assets/frontend/img/nodatafound.png" alt="no-data" />
+          getPaginatedData()?.map((c => {
+            return(
+            <Link key={c.ID} to={`/country/${c.ID}`} onClick={() => dispatch(countryDetail({
+                ID: c.ID,
+                name: c.name,
+                urlImg: c.urlImg,
+                continent: c.continent,
+                capital: c.capital,
+                area: c.area,
+                poblacion: c.poblacion,
+                activities: c.activities
+              }))}>
+              <Country name={c.name} urlImg={c.urlImg} continent={c.continent} />
+            </Link>)
+          })) : (
+            <>
+            <h1>No hay nada por aquí... (Presiona en BORRAR FILTROS)</h1>
+            <img src="https://www.surjen.com/resources/assets/frontend/img/nodatafound.png" alt="no-data" />
+            </>
+          )
         :
         <h1>Cargando...</h1>
       }
