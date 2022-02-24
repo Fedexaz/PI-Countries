@@ -17,7 +17,7 @@
 .navContainer{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
     border-top: 1px solid black;
     padding-top: 4px;
     border-bottom: 1px solid black;

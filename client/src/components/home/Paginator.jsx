@@ -4,11 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { Link } from 'react-router-dom';
 
-import { countryDetail, loadingState, filterAndOrder } from '../../redux/actions';
+import { countryDetail, loadingState, filterAndOrder, loadCountries } from '../../redux/actions';
 
 import Country from './Country';
 
 import style from './css/countries.module.css'
+import style2 from './css/paginator.module.css'
 
 export default function Paginator() {
   const data = useSelector(state => state.countries);
@@ -18,8 +19,8 @@ export default function Paginator() {
   const [currentPage, setCurrentPage] = useState(1);
   const dispatch = useDispatch();
 
-  function changePage(event, page = 1) {
-    const pageNumber = Number(!event ? page : event.target.textContent);
+  function changePage(event) {
+    const pageNumber = Number(event.target.value);
     setCurrentPage(pageNumber);
   }
 
@@ -30,12 +31,14 @@ export default function Paginator() {
   };
 
   const getPaginationGroup = () => {
-    const start = Math.ceil(data.length / 10)
-    return new Array(start).fill().map((_, i) => i + 1)
+    return new Array(Math.ceil(data.length / 10)).fill().map((_, idx) => idx + 1)
   };
-
+  
   useEffect(() => {
-    window.scrollTo({ behavior: 'smooth', top: '0px' });
+    window.scrollTo({ 
+      behavior: 'smooth',
+      top: '0px' 
+    });
     document.title = "Countries página " + currentPage;
   }, [currentPage]);
 
@@ -45,11 +48,11 @@ export default function Paginator() {
         dispatch(loadingState(false))
         dispatch(filterAndOrder(false))
       }
-  }, [filtradoUOrdenado, dispatch])
+  }, [filtradoUOrdenado])
 
   return (
     <>
-    <div className={style.cardcontainer}>
+      <div className={style.cardcontainer}>
       {
         !loading ?
         data.length ?
@@ -68,18 +71,34 @@ export default function Paginator() {
               <Country name={c.name} urlImg={c.urlImg} continent={c.continent} />
             </Link>)
           })) : (
-            <>
-            <h1>No hay nada por aquí... (Presiona en BORRAR FILTROS)</h1>
-            <img src="https://www.surjen.com/resources/assets/frontend/img/nodatafound.png" alt="no-data" />
-            </>
+            <div className={style2.noDataContainer}>
+              <h1>No hay nada por aquí... </h1>
+              <button className={style2.botonRecargarPaises} onClick={(e) => {
+                  dispatch(loadCountries())
+                  dispatch(loadingState(false))
+                  document.getElementById('filtPorContinente').value="sel"
+                  document.getElementById('filtPorActividad').value="sel"
+                  document.getElementById('ordenPoblacion').value="sel"
+                  document.getElementById('ordenAlfabetico').value="sel"
+                }
+              }>Recargar países</button>
+            </div>
           )
         :
         <h1>Cargando...</h1>
       }
       </div>
-      <div className={style.paginatorcontainer}>
-        {getPaginationGroup().map((i) => ( <button key={i} onClick={changePage}>{i}</button> ))}
-      </div>
+      {data.length ?
+        <div className={style2.paginatorcontainer}>
+          <button className={`${style2.antPage} ${currentPage === 1 ? style2.disabled : ''}`} onClick={e => setCurrentPage(page => page - 1)}>Prev Page</button>
+          <select className={style2.button} name="pages" id="pages" value={currentPage} onChange={changePage}>
+            {data.length ? getPaginationGroup().map((i) => (
+              <option key={i} className={`${i === currentPage ? style2.buttonSelected : ''}`} value={i}>Page {i} {i === currentPage ? '(*)' : ''}</option> 
+              )): null}
+          </select>
+          <button className={`${style2.sigPage} ${currentPage === Math.ceil(data.length / 10) ? style2.disabled : ''}`} onClick={e => setCurrentPage(page => page + 1)}>Next Page</button>
+        </div>
+      : null}
     </>
   );
 }

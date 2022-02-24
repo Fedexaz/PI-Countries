@@ -70,7 +70,7 @@ export default function Filter() {
         }
       </select>
 
-      <button className={style.boton} onClick={(e) => {
+      <button className={style.botonReset} onClick={(e) => {
           dispatch(loadCountries())
           dispatch(loadingState(false))
           dispatch(filterAndOrder(true))
@@ -78,6 +78,7 @@ export default function Filter() {
           document.getElementById('filtPorActividad').value="sel"
           document.getElementById('ordenPoblacion').value="sel"
           document.getElementById('ordenAlfabetico').value="sel"
+          document.getElementById('pages').value="1"
         }
       }>
       BORRAR FILTROS</button>

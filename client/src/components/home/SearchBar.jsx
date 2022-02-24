@@ -20,8 +20,8 @@ export default function SearchBar() {
 
   return (
     <form className={style.formulario} onSubmit={(e) => handleSubmit(e)}>
-        <input type="text" name='inputPais' placeholder='Ingresa un nombre de país' value={inputPais} onChange={e => handleChange(e)}/>
         <button type='submit'>Buscar</button>
+        <input type="text" name='inputPais' placeholder='Ingresa un nombre de país' value={inputPais} onChange={e => handleChange(e)}/>
     </form>
   )
 }

@@ -4,24 +4,3 @@
     justify-content: space-evenly;
     padding: 20px;
 }
-
-.paginatorcontainer{
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 20px;
-}
-
-.paginatorcontainer > button{
-    border-radius: 3px;
-    padding: 10px;
-    text-decoration: none;
-    border: 1px solid black;
-    transition: .05s;
-}
-
-.paginatorcontainer > button:hover{
-    transform: scale(1.02);
-    cursor:pointer;
-    background-color: black;
-    color: white;
-}

@@ -8,6 +8,7 @@ import style from './css/countrydetail.module.css'
 
 export default function CountryDetail() {
   const pais = useSelector(state => state.countryDetail)
+
   return (
     <>
     <Link className={style.button} to='/home'>back</Link>
