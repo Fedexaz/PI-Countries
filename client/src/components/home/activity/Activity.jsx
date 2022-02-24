@@ -30,6 +30,7 @@ export default function Activity() {
     })
 
     const [bPaises, setBPaises] = useState([])
+    const [countryNames, setCountryNames] = useState([])
 
     function handleChange(e){
         const { name, value } = e.target;
@@ -104,11 +105,12 @@ export default function Activity() {
         }
     }
 
-    function agregarPais(idPais){
+    function agregarPais(idPais, namePais){
         setInput({
             ...input,
             pais: input.pais.indexOf(idPais) === -1 ? [...input.pais, idPais] : [...input.pais]
         })
+        setCountryNames([...countryNames, {name: namePais, ID: idPais}])
     }
 
     function handleSubmit(e){
@@ -125,21 +127,31 @@ export default function Activity() {
         document.title = "Agregar actividad";
     }, [])
 
+    function deleteCountry(event, country){
+        console.log(country);
+        setInput(prev => {
+            return {
+                ...prev,
+                pais: input.pais.filter(e => e !== country)
+            }
+        });
+    }
+
     return (
       <>
         <Link className={style.button} to='/home'>back</Link>
         <form className={style.container} method="POST" onSubmit={handleSubmit}>
             <h1>Agregar actividad Turística</h1>
 
-            <label htmlFor="name">Nombre de la actividad:</label>
+            <label htmlFor="name">Nombre de la actividad (3 letras o más):</label>
             <input type="text" name="name" id="name" placeholder='Ingresa un nombre' value={input.name} onChange={handleChange} />
             {error.name.length ? <span>{error.name}</span> : null }
 
-            <label htmlFor="dificultad">Dificultad de la actividad:</label>
+            <label htmlFor="dificultad">Dificultad de la actividad (1 - 5):</label>
             <input type="number" min='0' name="dificultad" id="dificultad" placeholder='Ingresa una dificultad' value={input.dificultad} onChange={handleChange} />
             {error.dificultad.length ? <span>{error.dificultad}</span> : null }
 
-            <label htmlFor="duracion">Duración de la actividad:</label>
+            <label htmlFor="duracion">Duración de la actividad (0 - 2000 horas):</label>
             <input type="number" min='0' max='2001' name="duracion" id="duracion" placeholder='Ingresa una duración' value={input.duracion} onChange={handleChange} />
             {error.duracion.length ? <span>{error.duracion}</span> : null }
 
@@ -163,7 +175,7 @@ export default function Activity() {
                         <ul className={style.lista}>
                             {bPaises?.map(e=>{
                                 return (
-                                        <li key={e.ID}>{e.name} <span className={style.addButton} onClick={(evento) => agregarPais(e.ID)}>Agregar</span></li>
+                                        <li key={e.ID}>{e.name} <span className={style.addButton} onClick={(evento) => agregarPais(e.ID, e.name)}>Agregar</span></li>
                                     )
                                 }) 
                             }
@@ -181,7 +193,7 @@ export default function Activity() {
                         <div id="paisesContainer">
                             <ul className={style.lista}>
                                 {
-                                    input.pais?.map(e => <li key={e}>{e}</li>)
+                                    input.pais?.map(e => <li key={e}>{countryNames.find(el => el.ID === e).name} <span className={style.deleteCountry} onClick={ev => deleteCountry(ev, e)}>X</span></li>)
                                 }
                             </ul>
                         </div>
