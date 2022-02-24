@@ -35,10 +35,10 @@ export default function Paginator() {
   };
   
   useEffect(() => {
-    window.scrollTo({ 
+    /* window.scrollTo({ 
       behavior: 'smooth',
       top: '0px' 
-    });
+    }); */
     document.title = "Countries página " + currentPage;
   }, [currentPage]);
 
