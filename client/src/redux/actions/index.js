@@ -15,15 +15,10 @@ export function loadingState(payload){
 }
 
 export function addActividad(name, dificultad, duracion, temporada, idPais){
-    return function (dispatch){
-        axios.post('/activity', {
-            name,
-            dificultad,
-            duracion,
-            temporada,
-            idPais
-        })
-        .then(resp => {
+    return async function (dispatch){
+        try {
+            await axios.post('/activity', {name, dificultad, duracion, temporada, idPais})
+            alert('Actividad agregada correctamente!')
             return dispatch({
                 type: "AGREGAR_ACTIVIDAD",
                 payload: {
@@ -34,10 +29,9 @@ export function addActividad(name, dificultad, duracion, temporada, idPais){
                     idPais
                 }
             })
-        })
-        .catch(e => {
-            console.log(e)
-        })  
+        } catch (e) {
+            alert('Error interno: ' + e)
+        }
     }          
 }
 
@@ -97,9 +91,15 @@ export function ordenCantidadPoblacion(tipo){
     }
 }
 
-export function countryDetail(payload){
-    return{
-        type: "COUNTRY_DETAIL",
-        payload
-    }    
+export function countryDetail(id){
+    return function(dispatch){
+        axios.get(`countries/${id}`)
+        .then(res => {
+            return dispatch({
+                type: "COUNTRY_DETAIL",
+                payload: res.data[0]
+            })
+        })
+        .catch(e => console.log(e))
+    }
 }

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { Link } from 'react-router-dom';
 
-import { countryDetail, loadingState, filterAndOrder, loadCountries } from '../../redux/actions';
+import { loadingState, filterAndOrder, loadCountries, countryDetail } from '../../redux/actions';
 
 import Country from './Country';
 
@@ -58,22 +58,13 @@ export default function Paginator() {
         data.length ?
           getPaginatedData()?.map((c => {
             return(
-            <Link key={c.ID} to={`/country/${c.ID}`} onClick={() => dispatch(countryDetail({
-                ID: c.ID,
-                name: c.name,
-                urlImg: c.urlImg,
-                continent: c.continent,
-                capital: c.capital,
-                area: c.area,
-                poblacion: c.poblacion,
-                activities: c.activities
-              }))}>
+            <Link key={c.ID} to={`/country/${c.ID}`} onClick={e => dispatch(countryDetail(c.ID))}>
               <Country name={c.name} urlImg={c.urlImg} continent={c.continent} />
             </Link>)
           })) : (
             <div className={style2.noDataContainer}>
-              <h1>No hay nada por aquí... </h1>
-              <button className={style2.botonRecargarPaises} onClick={(e) => {
+              <h1 className={style2.noHayNada} style={{pointerEvents: 'none'}}>Ups... Algo ha ocurrido...</h1>
+              <button className={style2.botonRecargarPaises} style={{cursor: 'pointer'}} onClick={(e) => {
                   dispatch(loadCountries())
                   dispatch(loadingState(false))
                   document.getElementById('filtPorContinente').value="sel"

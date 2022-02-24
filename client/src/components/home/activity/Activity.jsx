@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 
 import { useDispatch } from 'react-redux'
 
-import { addActividad } from '../../../redux/actions'
+import { addActividad, filterAndOrder, loadingState } from '../../../redux/actions'
 
 import style from './css/activity.module.css'
 
@@ -117,7 +117,8 @@ export default function Activity() {
         e.preventDefault()
         if(validarForm()){
             dispatch(addActividad(input.name, input.dificultad, input.duracion, input.temporada, input.pais))
-            alert("Actividad agregada correctamente!")
+            dispatch(loadingState(false))
+            dispatch(filterAndOrder(true))
         }else{
             alert("ERROR: Faltan completar algunos campos!");
         }

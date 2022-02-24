@@ -8,16 +8,17 @@ import style from './css/landing.module.css'
   <div className="lds-spinner centrar"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
 */
 
-import { useDispatch, /* useSelector */ } from 'react-redux';
+/* 
+import { useDispatch, useSelector } from 'react-redux';
 import { loadCountries } from '../../redux/actions';
-
+ */
 export default function LandingPage() {    
-    const dispatch = useDispatch()
+    //const dispatch = useDispatch()
 
     useEffect(() => {
         document.title = "Countries PI"
-        dispatch(loadCountries())
-    }, [dispatch])
+        //dispatch(loadCountries())
+    }, [])
 
   return (
     <div className={style.container}>

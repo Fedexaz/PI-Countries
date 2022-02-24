@@ -106,3 +106,10 @@ option{
     background-color: black;
     color: white;   
 }
+
+.noHayNada{
+    padding: 40px;
+    font-weight: 500;
+    background-color: black;
+    color: white;
+}
