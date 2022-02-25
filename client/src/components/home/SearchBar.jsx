@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { searchCountry } from '../../redux/actions';
+import { loadingState, searchCountry } from '../../redux/actions';
 
 import style from './css/searchbar.module.css'
 
@@ -12,6 +12,7 @@ export default function SearchBar() {
   function handleSubmit(evento){
     evento.preventDefault();
     dispatch(searchCountry(inputPais))
+    dispatch(loadingState(true))
   }
 
   function handleChange (e) {

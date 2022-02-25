@@ -42,6 +42,7 @@ export default function reducer(state = initialState, action){
         case "SEARCH_COUNTRY":{
             return {
                 ...state,
+                loading: false,
                 countries: action.payload
             }
         }

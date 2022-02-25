@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { loadingState, filterAndOrder, loadCountries, countryDetail } from '../../redux/actions';
 
 import Country from './Country';
+import '../spinner.css'
 
 import style from './css/countries.module.css'
 import style2 from './css/paginator.module.css'
@@ -76,7 +77,7 @@ export default function Paginator() {
             </div>
           )
         :
-        <h1>Cargando...</h1>
+        <div className="lds-spinner centrar"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
       }
       </div>
       {data.length ?
