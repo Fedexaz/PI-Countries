@@ -26,12 +26,12 @@ export default function Filter() {
       <select className={style.button} name="filtPorContinente" id="filtPorContinente" onChange={(e) => { 
           if(e.target.value !== 'sel'){
             dispatch(filtrarPorContinente(e.target.value))
-            dispatch(loadingState(false))
+            dispatch(loadingState(true))
             dispatch(filterAndOrder(true))
           }
           else {
             dispatch(loadCountries())
-            dispatch(loadingState(false))
+            dispatch(loadingState(true))
             dispatch(filterAndOrder(true))
             document.getElementById('filtPorContinente').value="sel"
             document.getElementById('filtPorActividad').value="sel"
@@ -50,12 +50,12 @@ export default function Filter() {
       <select className={style.button} name="filtPorActividad" id="filtPorActividad"  onChange={(e) => { 
           if(e.target.value !== 'sel'){
             dispatch(filtrarPorActividad(e.target.value))
-            dispatch(loadingState(false))
+            dispatch(loadingState(true))
             dispatch(filterAndOrder(true))
           }
           else {
             dispatch(loadCountries())
-            dispatch(loadingState(false))
+            dispatch(loadingState(true))
             dispatch(filterAndOrder(true))
             document.getElementById('filtPorContinente').value="sel"
             document.getElementById('filtPorActividad').value="sel"
@@ -72,7 +72,7 @@ export default function Filter() {
 
       <button className={style.botonReset} onClick={(e) => {
           dispatch(loadCountries())
-          dispatch(loadingState(false))
+          dispatch(loadingState(true))
           dispatch(filterAndOrder(true))
           document.getElementById('filtPorContinente').value="sel"
           document.getElementById('filtPorActividad').value="sel"

@@ -49,21 +49,24 @@ export default function reducer(state = initialState, action){
         
         case "FILTRAR_CONTINENTE":{
             
-            if(state.countries.length  === 0)state.countries = state.countriesBackup;
-
-            return {
-                ...state,
-                countries: state.countries.filter(e => e.continent === action.payload)
-            }
-        }
-        
-        case "FILTRAR_ACTIVIDAD":{
-
             //if(state.countries.length  === 0)state.countries = state.countriesBackup;
             state.countries = state.countriesBackup;
 
             return {
                 ...state,
+                loading: false,
+                countries: state.countries.filter(e => e.continent === action.payload)
+            }
+        }
+        
+        case "FILTRAR_ACTIVIDAD":{
+            
+            //if(state.countries.length  === 0)state.countries = state.countriesBackup;
+            state.countries = state.countriesBackup;
+            
+            return {
+                ...state,
+                loading: false,
                 countries: state.countries.filter(el => el.activities.find(e => (e.name).toLowerCase() === (action.payload).toLowerCase()))
             }
         }
