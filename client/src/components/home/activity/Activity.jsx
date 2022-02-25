@@ -29,8 +29,8 @@ export default function Activity() {
         pais: '',
     })
 
-    const [bPaises, setBPaises] = useState([])
-    const [countryNames, setCountryNames] = useState([])
+    const [bPaises, setBPaises] = useState([])//Paises buscados
+    const [countryNames, setCountryNames] = useState([])//nombre de los paises buscados que se van a agregar a la actividad (uso temporal)
 
     function handleChange(e){
         const { name, value } = e.target;

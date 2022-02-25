@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const { Country, Activity } = require('../db');
-const { Op, fn } = require("sequelize");
+const { Op } = require("sequelize");
 const axios = require('axios');
 
 const route = Router();
@@ -8,7 +8,6 @@ const route = Router();
 const loadDB = async () => {
     console.log("Cargando datos...")
     const existe = await Country.count();
-    console.log(existe)
     if(!existe){
         axios.get('https://restcountries.com/v3/all')
         .then(respuesta => {

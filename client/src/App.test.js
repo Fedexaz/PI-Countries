@@ -5,6 +5,7 @@ import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import store from './redux/store'
 import Activity from './components/home/activity/Activity';
+import reducer, { initialState } from './redux/reducer/index.js'
 
 describe('Componente LandingPage', () => {
   it('Existe un boton de explorar! (explore!)', async () => { 
@@ -45,3 +46,24 @@ describe('Componente formulario Activity', () => {
     expect(screen.getByText(/nombre/ig)).toBeInTheDocument()
   });
 })
+
+describe('Initialstate', () => {
+  it('Tiene una constante inicial', () => {
+    expect(initialState).toBeDefined()
+  });
+
+  it('Tiene valores predefinidos el initialState', () => {
+    expect(initialState).toEqual({
+      countries: [],
+      countriesBackup:[],
+      activities: [],
+      countryDetail: {},
+      loading: false,
+      applyFilterAndOrder: false
+    })
+  });
+
+  it('Tiene una funcion reducer', () => {
+    expect(typeof reducer).toEqual('function')
+  });
+});

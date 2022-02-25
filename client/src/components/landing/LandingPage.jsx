@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom'
 
 import style from './css/landing.module.css'
 
-import { useDispatch, useSelector } from 'react-redux';
-import { loadCountries } from '../../redux/actions';
+import { useDispatch } from 'react-redux';
+import { loadCountries, loadingState } from '../../redux/actions';
 
 export default function LandingPage() {    
     const dispatch = useDispatch()
@@ -12,6 +12,7 @@ export default function LandingPage() {
     useEffect(() => {
         document.title = "Countries PI"
         dispatch(loadCountries())
+        dispatch(loadingState(true))
     }, [])
 
   return (

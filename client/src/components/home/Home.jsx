@@ -12,7 +12,7 @@ export default function Home() {
   const filtrado = useSelector(st => st.applyFilterAndOrder)
 
   useEffect(() => {
-    if(filtrado) dispatch(loadCountries())
+    if(filtrado) dispatch(loadCountries())//si se aplica algun filtrado y se recarga el componente, vuelve a cargar los paises
   }, [])
 
   return (

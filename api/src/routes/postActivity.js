@@ -43,7 +43,7 @@ route.get('/', async (req, res) => {
     let array = []
 
     for(let i = 0; i < result.length; i++){
-        if(array.indexOf(result[i].name) === -1){
+        if(array.indexOf(result[i].name) === -1){ // si no encuentra repetidos no los pushea al array
             array.push(result[i].name)
         }
     }

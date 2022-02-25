@@ -1,4 +1,4 @@
-const initialState = {
+export const initialState = {
     countries: [],
     countriesBackup:[],
     activities: [],
@@ -8,7 +8,6 @@ const initialState = {
 }
 
 export default function reducer(state = initialState, action){
-
     switch(action.type){
         case "APPLY_FILTER_AND_ORDER":{
             return {
@@ -34,6 +33,7 @@ export default function reducer(state = initialState, action){
         case "LOAD_COUNTRIES":{
             return {
                 ...state,
+                loading: false,
                 countries: action.payload,
                 countriesBackup: action.payload
             }

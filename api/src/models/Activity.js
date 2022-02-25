@@ -8,7 +8,7 @@ module.exports = (sequelize) => {
         primaryKey: true
     },
     name: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(128),
       allowNull: false,
     },
     dificultad: {
@@ -20,7 +20,7 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     temporada: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(24),
       allowNull: false
     },
   });
