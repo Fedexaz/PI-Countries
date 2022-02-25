@@ -14,6 +14,7 @@ export default function Home() {
   useEffect(() => {
     if(filtrado) dispatch(loadCountries())
   }, [])
+
   return (
     <>
       <div className={style.navContainer}>
