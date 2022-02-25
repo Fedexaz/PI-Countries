@@ -28,6 +28,7 @@ export default function Filter() {
             dispatch(filtrarPorContinente(e.target.value))
             dispatch(loadingState(true))
             dispatch(filterAndOrder(true))
+            document.getElementById('filtPorActividad').value="sel"
           }
           else {
             dispatch(loadCountries())
@@ -52,6 +53,7 @@ export default function Filter() {
             dispatch(filtrarPorActividad(e.target.value))
             dispatch(loadingState(true))
             dispatch(filterAndOrder(true))
+            document.getElementById('filtPorContinente').value="sel"
           }
           else {
             dispatch(loadCountries())
