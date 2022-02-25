@@ -59,7 +59,8 @@ export default function reducer(state = initialState, action){
         
         case "FILTRAR_ACTIVIDAD":{
 
-            if(state.countries.length  === 0)state.countries = state.countriesBackup;
+            //if(state.countries.length  === 0)state.countries = state.countriesBackup;
+            state.countries = state.countriesBackup;
 
             return {
                 ...state,
