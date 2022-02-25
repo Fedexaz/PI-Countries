@@ -67,7 +67,7 @@ export default function Paginator() {
               <h1 className={style2.noHayNada} style={{pointerEvents: 'none'}}>Ups... Algo ha ocurrido...</h1>
               <button className={style2.botonRecargarPaises} style={{cursor: 'pointer'}} onClick={(e) => {
                   dispatch(loadCountries())
-                  dispatch(loadingState(false))
+                  dispatch(loadingState(true))
                   document.getElementById('filtPorContinente').value="sel"
                   document.getElementById('filtPorActividad').value="sel"
                   document.getElementById('ordenPoblacion').value="sel"

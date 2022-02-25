@@ -60,7 +60,13 @@ export function searchCountry(country){
             })
         })
         .catch(e => {
+            alert('¡Pais no encontrado o inexistente!')
             console.log(e)
+            dispatch({
+                type: "LOAD_STATE",
+                payload: false
+            })
+            return dispatch(loadCountries())
         })  
     }
 }
