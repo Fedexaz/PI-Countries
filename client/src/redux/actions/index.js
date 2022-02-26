@@ -31,6 +31,7 @@ export function addActividad(name, dificultad, duracion, temporada, idPais){
             })
         } catch (e) {
             alert('Error interno: ' + e)
+            alert('TIP: Prueba cambiando el nombre de la actividad')
         }
     }          
 }

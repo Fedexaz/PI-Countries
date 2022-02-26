@@ -113,21 +113,29 @@ export default function Activity() {
         setCountryNames([...countryNames, {name: namePais, ID: idPais}])
     }
 
-    function handleSubmit(e){
+    async function handleSubmit(e){
         e.preventDefault()
         if(validarForm()){
-            dispatch(addActividad(input.name, input.dificultad, input.duracion, input.temporada, input.pais))
-            dispatch(loadingState(false))
-            dispatch(filterAndOrder(true))
+            try {
+                const resp = await axios.get('/activity')
+                const act = resp.data
+                console.log(act);
+                if(!act.length || act.find(el => el.name === input.name) === -1){                    
+                    dispatch(addActividad(input.name, input.dificultad, input.duracion, input.temporada, input.pais))
+                    dispatch(loadingState(false))
+                    dispatch(filterAndOrder(true))
+                }else{
+                    alert("ERROR: La actividad con ese nombre ya existe!");
+                }
+            } catch (error) {
+                alert("ERROR: reintenta más tarde! ("+ error +")");
+            }
         }else{
             alert("ERROR: Faltan completar algunos campos!");
         }
     }
 
-    useEffect(()=>{
-        document.title = "Agregar actividad";
-    }, [])
-
+    
     function deleteCountry(event, country){//recibo el id del pais a borrar
         console.log(country);
         setInput(prev => {
@@ -138,6 +146,10 @@ export default function Activity() {
         });
     }
 
+    useEffect(()=>{
+        document.title = "Agregar actividad";
+    }, [])
+    
     return (
       <>
         <Link className={style.button} to='/home'>back</Link>

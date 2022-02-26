@@ -5,11 +5,12 @@ module.exports = (sequelize) => {
     ID: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
-        primaryKey: true
+        primaryKey: true,
     },
     name: {
       type: DataTypes.STRING(128),
       allowNull: false,
+      unique: true,
     },
     dificultad: {
       type: DataTypes.INTEGER,
@@ -21,7 +22,7 @@ module.exports = (sequelize) => {
     },
     temporada: {
       type: DataTypes.STRING(24),
-      allowNull: false
+      allowNull: false,
     },
   });
 };
