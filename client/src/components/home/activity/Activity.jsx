@@ -118,9 +118,8 @@ export default function Activity() {
         if(validarForm()){
             try {
                 const resp = await axios.get('/activity')
-                const act = resp.data
-                console.log(act);
-                if(!act.length || act.find(el => el.name === input.name) === -1){                    
+                const act = resp.data;
+                if(!act.length || act.indexOf(input.name) === -1){                
                     dispatch(addActividad(input.name, input.dificultad, input.duracion, input.temporada, input.pais))
                     dispatch(loadingState(false))
                     dispatch(filterAndOrder(true))
