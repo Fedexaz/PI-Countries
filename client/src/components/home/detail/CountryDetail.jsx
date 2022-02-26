@@ -31,7 +31,9 @@ export default function CountryDetail() {
     return (
     <>
       <Link className={style.button} to='/home'>back</Link>
-      <h1>Ha ocurrido un error...</h1>
+      <center>
+        <h1>Ha ocurrido un error...</h1>
+      </center>
     </>)
   }
 }
