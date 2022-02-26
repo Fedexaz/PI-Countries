@@ -94,3 +94,5 @@ export default function Paginator() {
     </>
   );
 }
+
+//<div style={{color: 'white', }}></div>

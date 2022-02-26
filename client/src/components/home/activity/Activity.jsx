@@ -63,7 +63,7 @@ export default function Activity() {
             case 'temporada':{
                 setError({
                     ...error,
-                    temporada: value === 'seleccionar' ? 'Elige una temporada' : '' 
+                    temporada: value === 'seleccionar' ? 'Elige una temporada!' : '' 
                 })
                 break;
             }
@@ -83,7 +83,7 @@ export default function Activity() {
     function validarForm(){
         let valid = true;
         
-        if(input.pais.length === 0) valid = false
+        if(input.pais.length === 0) valid = false //arreglo con los noombres de los paises
 
         if(input.name.length <= 2) valid = false
 
@@ -128,7 +128,7 @@ export default function Activity() {
         document.title = "Agregar actividad";
     }, [])
 
-    function deleteCountry(event, country){
+    function deleteCountry(event, country){//recibo el id del pais a borrar
         console.log(country);
         setInput(prev => {
             return {

@@ -5,7 +5,7 @@ const axios = require('axios');
 
 const route = Router();
 
-const loadDB = async () => {
+/* const loadDB = async () => {
     console.log("Cargando datos...")
     const existe = await Country.count();
     if(!existe){
@@ -39,7 +39,7 @@ const loadDB = async () => {
     }
 }
 
-loadDB()
+loadDB() */
 
 route.get('/', async (req, res) => {
     const { name } = req.query;  
