@@ -13,6 +13,7 @@ const crearActividad = async (name, dificultad, duracion, temporada, idPais) => 
             temporada
         }) 
         await act.addCountry(idPais)
+        console.log("Actividad: "+ name +" agregada al pais "+ idPais);
     } catch (e) {
         console.log(e);
     }
@@ -21,13 +22,13 @@ const crearActividad = async (name, dificultad, duracion, temporada, idPais) => 
 route.post('/', /* async */ (req, res) => {
     const { name, dificultad, duracion, temporada, idPais } = req.body;
 
-    if(name && dificultad && duracion && temporada && idPais){
+    if(name && dificultad && duracion && temporada && idPais.length > 0){
         idPais.forEach((e) =>{
             crearActividad(name, dificultad, duracion, temporada, e)
         })
 
         return res.status(201).json({
-            msg: `Actividades '${name}' creada correctamente!`
+            msg: `Actividad '${name}' creada correctamente!`
         });
     }
     else{
@@ -54,12 +55,10 @@ route.get('/', async (req, res) => {
     res.send(array);
 })
 
-route.get('/reloadActivities', async (req, res) => {
+/* route.get('/reloadActivities', async (req, res) => {
     console.log('Reiniciando actividades');
     try {
-        await Activity.destroy({
-            where: {}
-        });
+        await Activity.destroy();
 
         let datosDefault = fs.readFileSync(__dirname + '/activities.json', 'utf-8')
 
@@ -89,7 +88,7 @@ route.get('/reloadActivities', async (req, res) => {
         console.log(error);
         res.sendStatus(400)
     }
-})
+}) */
 
 route.delete('/:name', async (req, res) => {//la he creado porque compartí el enlace de la página en un grupo de whatsapp en el cual uno se hizo el vivo y publicó una actividad que iba a ser de mal gusto, y para evitar hacer muchos deploy directamente borro un registro de actividad por nombre (ya que es único)
     const { name } = req.params;

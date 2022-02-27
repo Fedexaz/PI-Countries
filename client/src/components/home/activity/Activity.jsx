@@ -119,7 +119,8 @@ export default function Activity() {
             try {
                 const resp = await axios.get('/activity')
                 const act = resp.data;
-                if(!act.length || act.indexOf(input.name) === -1){                
+                console.log(input.pais);
+                if(!act.length || act.indexOf(input.name) === -1){
                     dispatch(addActividad(input.name, input.dificultad, input.duracion, input.temporada, input.pais))
                     dispatch(loadingState(false))
                     dispatch(filterAndOrder(true))
@@ -135,12 +136,12 @@ export default function Activity() {
     }
 
     
-    function deleteCountry(event, country){//recibo el id del pais a borrar
-        console.log(country);
+    function deleteCountry(event, countryID){//recibo el id del pais a borrar
+        console.log(countryID);
         setInput(prev => {
             return {
                 ...prev,
-                pais: input.pais.filter(e => e !== country)
+                pais: input.pais.filter(e => e !== countryID)
             }
         });
     }
