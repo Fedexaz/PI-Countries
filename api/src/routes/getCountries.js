@@ -5,42 +5,6 @@ const axios = require('axios');
 
 const route = Router();
 
-const loadDB = async () => {
-    console.log("Cargando datos...")
-    const existe = await Country.count();
-    if(!existe){
-        axios.get('https://restcountries.com/v3/all')
-        .then(respuesta => {
-            respuesta.data.forEach(async (e) => {
-                let cap = "None";
-                if(Array.isArray(e.capital)){
-                    cap = e.capital.pop();
-                }
-
-                await Country.create({
-                    ID: e.cca3,
-                    name: e.name.common,
-                    urlImg: e.flags[1],
-                    continent: e.region,
-                    capital: cap,
-                    subregion: !e.subregion ? 'Antarctic' : e.subregion,
-                    area: e.area,
-                    poblacion: e.population
-                })
-            })
-            console.log("Datos traidos de la API y cargados en la DB");
-        })
-        .catch (e => {
-            console.log(e);
-        })
-    }
-    else{
-        console.log("Base de datos cargada!")
-    }
-}
-
-loadDB()
-
 route.get('/', async (req, res) => {
     const { name } = req.query;  
 
@@ -51,7 +15,7 @@ route.get('/', async (req, res) => {
                     [Op.iLike]: `%${name}%`
                 }
             },
-            include: Activity
+            include: Activity 
         })
 
         if(resultado.length === 0){
@@ -63,7 +27,12 @@ route.get('/', async (req, res) => {
         res.status(200).json(resultado)
     }
     else{
-        const resultado = await Country.findAll({include: Activity})
+        const resultado = await Country.findAll({
+            include: {
+                model: Activity,
+                attributes: ["name"]
+            }
+        })
         res.status(200).send(resultado)
     }
 
