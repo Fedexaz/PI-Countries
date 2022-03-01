@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 
 import { useDispatch } from 'react-redux'
 
-import { addActividad, filterAndOrder, loadingState } from '../../../redux/actions'
+import { addActividad, filterAndOrder, loadCountries, loadingState } from '../../../redux/actions'
 
 import style from './css/activity.module.css'
 
@@ -124,6 +124,7 @@ export default function Activity() {
                     dispatch(addActividad(input.name, input.dificultad, input.duracion, input.temporada, input.pais))
                     dispatch(loadingState(false))
                     dispatch(filterAndOrder(true))
+                    dispatch(loadCountries())
                 }else{
                     alert("ERROR: La actividad con ese nombre ya existe!");
                 }
