@@ -15,9 +15,9 @@ export default function Activity() {
 
     const [input, setInput] = useState({
         name: '',
-        dificultad: 0,
-        duracion: 0,
-        temporada: '',
+        dificultad: 1,
+        duracion: 1,
+        temporada: 'seleccionar',
         pais: []
     })
 
@@ -125,6 +125,16 @@ export default function Activity() {
                     dispatch(loadingState(false))
                     dispatch(filterAndOrder(true))
                     dispatch(loadCountries())
+                    setInput({
+                        name: '',
+                        dificultad: 0,
+                        duracion: 0,
+                        temporada: 'seleccionar',
+                        pais: []
+                    })
+                    setBPaises([])
+                    setCountryNames([])
+                    document.getElementById('bpais').value = '';
                 }else{
                     alert("ERROR: La actividad con ese nombre ya existe!");
                 }
