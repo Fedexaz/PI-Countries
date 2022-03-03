@@ -136,9 +136,17 @@ export default function reducer(state = initialState, action){
         }
 
         case "COUNTRY_DETAIL":{
+            state.countryDetail = {};
             return {
                 ...state,
                 countryDetail: action.payload
+            }
+        }
+
+        case "CLEAR_DETAIL":{
+            return {
+                ...state,
+                countryDetail: {}
             }
         }
         

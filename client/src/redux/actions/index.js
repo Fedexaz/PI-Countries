@@ -110,3 +110,9 @@ export function countryDetail(id){
         .catch(e => console.log(e))
     }
 }
+
+export function clearDetail(){
+    return{
+        type: 'CLEAR_DETAIL'
+    }
+}

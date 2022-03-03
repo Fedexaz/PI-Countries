@@ -1,13 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { Link } from 'react-router-dom'
 
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 import style from './css/countrydetail.module.css'
+import { clearDetail } from '../../../redux/actions'
 
 export default function CountryDetail() {
   const pais = useSelector(state => state.countryDetail)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    return function (){
+      dispatch(clearDetail())
+    }
+  },[])
 
   try {
     return (
