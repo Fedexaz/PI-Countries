@@ -18,10 +18,9 @@ La idea general es crear una aplicación en la cual se pueda ver información de
   - Filtrarlos / Ordenarlos
   - Crear actividades turísticas
 
-### Endpoints que se usan:
+### Endpoint que se usa:
 
   - GET https://restcountries.com/v3/all
-  - GET https://restcountries.com/v3/name/{name}
 
 #### Tecnologías usadas:
 - [ ] React
