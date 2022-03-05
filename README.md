@@ -99,3 +99,11 @@ Se ha desarrollado un servidor en Node/Express con las siguientes rutas:
 - [ ] __POST /activity__:
   - Recibe los datos recolectados desde el formulario controlado de la ruta de creación de actividad turística por body
   - Crea una actividad turística en la base de datos
+- [ ] __GET /Activity__:
+  - Obtiene el nombre de todas las actividades
+- [ ] __DELETE /Activity__:
+  - Elimina una actividad por su nombre pasado por body
+
+### Conclusión
+
+Hay más detalles que posee la aplicación, como controles estrictos en el formulario de actividades, cargado predefinido de 5 actividades, entre otras cosas.
